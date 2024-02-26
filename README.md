@@ -1,2 +1,3 @@
 # squire
- A quantum circuit simulator for Java
+ "Simulated QUantim wIREs", a quantum circuit simulator for Java
+ 
