@@ -1,7 +1,6 @@
 package qsim.circuit;
 
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 import qsim.complex.ComplexMatrix;

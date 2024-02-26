@@ -4,7 +4,6 @@ import qsim.circuit.QuantumGate;
 import qsim.circuit.gates.CNOTGate;
 import qsim.circuit.gates.HGate;
 import qsim.circuit.gates.IGate;
-import qsim.complex.ComplexMatrix;
 
 public class QuantumGateTests {
 
@@ -32,7 +31,6 @@ public class QuantumGateTests {
 
 	private static void largeIdentityTest() {
 		System.out.println("Expected result: 4x4 identity");
-		ComplexMatrix matrix = ComplexMatrix.ident(2);
 
 		QuantumGate qg = new IGate(2, 0);
 		System.out.println(qg.asMatrix());
