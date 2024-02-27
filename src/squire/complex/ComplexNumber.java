@@ -231,7 +231,7 @@ public class ComplexNumber {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%.4f + %.4fi", this.real, this.imag);
+		return this.real + " + " + this.imag + "i";
 	}
 
 	/**

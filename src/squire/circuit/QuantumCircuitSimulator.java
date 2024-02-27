@@ -37,11 +37,11 @@ public class QuantumCircuitSimulator {
 		this.gates.add(new IGate(this.numQubits, 0));
 		this.random = random;
 	}
-	
+
 	/**
 	 * Initializes a quantum circuit with n qubits to the zero-state.
 	 * 
-	 * @param n      The number of qubits.
+	 * @param n The number of qubits.
 	 */
 	public QuantumCircuitSimulator(int n) {
 		this.numQubits = n;
@@ -49,7 +49,6 @@ public class QuantumCircuitSimulator {
 		this.gates.add(new IGate(this.numQubits, 0));
 		this.random = new Random();
 	}
-
 
 	/**
 	 * Applies a Hadamard gate to qubit q.
@@ -72,7 +71,6 @@ public class QuantumCircuitSimulator {
 		this.addGate(g);
 	}
 
-	
 	/**
 	 * Applies an X gate to qubit q.
 	 * 
@@ -116,36 +114,36 @@ public class QuantumCircuitSimulator {
 	/**
 	 * Applies an RX gate to qubit q.
 	 * 
-	 * @param q The qubit to apply the gate to.
+	 * @param q     The qubit to apply the gate to.
 	 * @param theta The angle of the RX gate.
 	 */
 	public void rx(int q, double theta) {
 		QuantumGate g = (new RXGate(this.numQubits, q, theta));
 		this.addGate(g);
 	}
-	
+
 	/**
 	 * Applies an RY gate to qubit q.
 	 * 
-	 * @param q The qubit to apply the gate to.
+	 * @param q     The qubit to apply the gate to.
 	 * @param theta The angle of the RX gate.
 	 */
 	public void ry(int q, double theta) {
 		QuantumGate g = (new RYGate(this.numQubits, q, theta));
 		this.addGate(g);
 	}
-	
+
 	/**
 	 * Applies an RZ gate to qubit q.
 	 * 
-	 * @param q The qubit to apply the gate to.
+	 * @param q     The qubit to apply the gate to.
 	 * @param theta The angle of the RX gate.
 	 */
 	public void rz(int q, double theta) {
 		QuantumGate g = (new RZGate(this.numQubits, q, theta));
 		this.addGate(g);
 	}
-	
+
 	/**
 	 * Applies an S gate to qubit q.
 	 * 
@@ -216,16 +214,38 @@ public class QuantumCircuitSimulator {
 	 * @return An array of the final values of the qubits.
 	 */
 	public boolean[] run() {
+		return this.run(false);
+	}
+
+	/**
+	 * Runs the quantum circuit, and returns an array of the final values of the
+	 * qubits.
+	 * 
+	 * @param debug Prints out the state of the vector before it is measured if
+	 *              true.
+	 * @return An array of the final values of the qubits.
+	 */
+	public boolean[] run(boolean debug) {
 
 		StateVector sv = StateVector.createZeroState(this.numQubits);
 
+		ArrayList<CircuitModifier> measurements = new ArrayList<>();
 		// Add measurements.
 		for (int i = 0; i < this.numQubits; i++) {
-			this.measure(i);
+			measurements.add(new Measurement(this.numQubits, i, this.random));
 		}
 
 		// Run the circuit.
 		for (CircuitModifier cm : this.gates) {
+			sv = cm.apply(sv);
+		}
+
+		if (debug) {
+			System.out.println(sv);
+		}
+
+		// Measure.
+		for (CircuitModifier cm : measurements) {
 			sv = cm.apply(sv);
 		}
 

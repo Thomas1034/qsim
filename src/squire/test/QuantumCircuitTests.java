@@ -7,11 +7,12 @@ import squire.circuit.QuantumCircuitSimulator;
 public class QuantumCircuitTests {
 
 	public static void run(int n) {
-		smallHadamardTest(n);
-		largeHadamardTest(n);
-		smallEntanglingTest(n);
-		largeEntanglingTest(n);
-		teleportationTest(n);
+		//smallHadamardTest(n);
+		//largeHadamardTest(n);
+		//smallEntanglingTest(n);
+		//largeEntanglingTest(n);
+		//teleportationTest(n);
+		bellStateTest(n);
 	}
 
 	private static void smallHadamardTest(int tries) {
@@ -50,14 +51,14 @@ public class QuantumCircuitTests {
 	}
 
 	private static void teleportationTest(int tries) {
-		System.out.println("Running teleportation test on three qubits:");
+		double chance_of_one = 0.25;
+		System.out.println("Running teleportation test on three qubits (sending probability " + chance_of_one + "):");
 		QuantumCircuitSimulator qc = new QuantumCircuitSimulator(3, new Random());
 		// Alice has qubit 0 and 1
 		// Bob has qubit 2
 
 		// We'll use 1 and 2 as the communication pair, and set the initial state as
 		// follows:
-		double chance_of_one = 0.25;
 		qc.ry(0, Math.acos(Math.sqrt(chance_of_one)));
 
 		// Entangle 1 and 2 into the Hadamard-0 bell state
@@ -78,6 +79,30 @@ public class QuantumCircuitTests {
 		// And, hopefully, 0 is now sent to 2.
 
 		testCircuit(qc, tries);
+	}
+	
+	private static void bellStateTest(int tries) {
+		System.out.println("Bell states:");
+		QuantumCircuitSimulator qc0 = new QuantumCircuitSimulator(2, new Random());
+		qc0.h(0);
+		qc0.cx(1, 0);
+		testCircuit(qc0, tries);
+		QuantumCircuitSimulator qc1 = new QuantumCircuitSimulator(2, new Random());
+		qc1.x(0);
+		qc1.h(0);
+		qc1.cx(1, 0);
+		testCircuit(qc1, tries);
+		QuantumCircuitSimulator qc2 = new QuantumCircuitSimulator(2, new Random());
+		qc2.x(1);
+		qc2.h(0);
+		qc2.cx(1, 0);
+		testCircuit(qc2, tries);
+		QuantumCircuitSimulator qc3 = new QuantumCircuitSimulator(2, new Random());
+		qc3.x(0);
+		qc3.x(1);
+		qc3.h(0);
+		qc3.cx(1, 0);
+		testCircuit(qc3, tries);
 	}
 
 	private static void testCircuit(QuantumCircuitSimulator qc, int tries) {
