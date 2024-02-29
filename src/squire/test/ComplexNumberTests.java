@@ -10,7 +10,6 @@ public class ComplexNumberTests {
 		testMultiplication();
 		testDivision();
 		testExponential();
-		testPolarConversion();
 		testEquals();
 	}
 
@@ -56,15 +55,6 @@ public class ComplexNumberTests {
 		ComplexNumber result = num.exp();
 
 		assert result.equals(new ComplexNumber(-7.315110094901103, 1.0427436562359045));
-	}
-
-	public static void testPolarConversion() {
-		ComplexNumber num = new ComplexNumber(2, 3);
-
-		double[] polar = num.toPolar();
-
-		assert Math.abs(polar[0] - 3.605551275463989) < 1e-10;
-		assert Math.abs(polar[1] - 0.982793723247329) < 1e-10;
 	}
 
 	public static void testEquals() {

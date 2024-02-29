@@ -177,19 +177,13 @@ public class ComplexNumber {
 	 * @return The result of the exponentiation.
 	 */
 	public ComplexNumber exp() {
-		double[] polar = this.toPolar();
-		return new ComplexNumber(polar[0] * Math.cos(polar[1]), polar[0] * Math.sin(polar[1]));
-	}
-
-	/**
-	 * Converts the complex number to polar form.
-	 *
-	 * @return An array [magnitude, phase] representing the polar form.
-	 */
-	public double[] toPolar() {
-		double magnitude = this.mag();
-		double phase = Math.atan2(this.imag, this.real);
-		return new double[] { magnitude, phase };
+		if (this.equals(ZERO)) {
+			return ComplexNumber.ONE;
+		}		
+		double efactor = Math.exp(this.real);
+		double rpart = efactor * Math.cos(this.imag());
+		double ipart = efactor * Math.sin(this.imag());
+		return new ComplexNumber(rpart, ipart);
 	}
 
 	/**

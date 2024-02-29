@@ -1,8 +1,9 @@
-import squire.test.QuantumCircuitTests;
+import squire.test.QuantumGateTests;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		QuantumCircuitTests.run(1);
+		QuantumGateTests.run();
 	}
+	
 }

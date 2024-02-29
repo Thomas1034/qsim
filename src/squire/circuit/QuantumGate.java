@@ -7,15 +7,29 @@ import java.util.HashSet;
 import squire.complex.ComplexMatrix;
 import squire.complex.ComplexNumber;
 
+/**
+ * The {@code QuantumGate} class is an abstract implementation of the
+ * {@link CombinableCircuitModifier} interface, representing a quantum gate that
+ * can be applied to a quantum state vector. It defines operations for
+ * constructing quantum gates based on a complex matrix, number of qubits, and
+ * target qubits. The gate can be applied to a {@link StateVector} and provides
+ * methods to retrieve its complex matrix representation.
+ *
+ * @see CombinableCircuitModifier
+ * @see StateVector
+ */
 public abstract class QuantumGate implements CombinableCircuitModifier {
 
 	private ComplexMatrix matrix;
 	private ComplexMatrix originalMatrix;
-	
+
 	/**
 	 * Constructs a quantum gate with the specified complex matrix, number of
-	 * qubits, and target qubits.
-	 *
+	 * qubits, and target qubits. The quantum gate is designed to operate on a
+	 * quantum state vector, applying a transformation defined by the given complex
+	 * matrix to the specified target qubits within a quantum register of the
+	 * provided size.
+	 * 
 	 * @param matrix     The complex matrix defining the quantum gate.
 	 * @param numQubits  The total number of qubits in the quantum system.
 	 * @param targetBits The indices of the qubits to which the gate is applied.
@@ -56,12 +70,12 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 			// Forms a set of unordered pairs for the swaps.
 			// This prevents duplicates.
 			if (i != targetBits[i]) {
-				swaps.add(new UnorderedPair(i, targetBits[i]));				
+				swaps.add(new UnorderedPair(i, targetBits[i]));
 			}
 		}
 
 		// Applies the swaps.
-		for (UnorderedPair pair : swaps) {			
+		for (UnorderedPair pair : swaps) {
 			swapMatrices.add(swapQubitsMatrix(numQubits, pair.x(), pair.y()));
 		}
 
@@ -83,25 +97,21 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 
 		// Rearrange the bits so that the targets are in the correct order, apply the
 		// matrix, then reorganize back to the original order.
-		// This is the overall matrix, at long last.
-//		System.out.println("Rearrange matrix:");
-//		System.out.println(rearrangeBits);
-//		System.out.println("Gate matrix:");
-//		System.out.println(appliedGate);
-//		System.out.println("Restore matrix:");
-//		System.out.println(rearrangeBits);
 		this.matrix = rearrangeBits.mult(appliedGate).mult(restoreBits);
 
 	}
 
 	/**
-	 * Internal method to generate a matrix that swaps the positions of two qubits
-	 * in a quantum system.
+	 * Generates a complex matrix representing the operation of swapping the
+	 * positions of two qubits in a quantum system.
 	 *
 	 * @param numQubits The total number of qubits in the quantum system.
 	 * @param bit1      The index of the first qubit to be swapped.
 	 * @param bit2      The index of the second qubit to be swapped.
-	 * @return The complex matrix representing the qubit swap operation.
+	 * @return A complex matrix representing the qubit swap operation.
+	 * @throws IllegalArgumentException If either {@code bit1} or {@code bit2} is
+	 *                                  out of bounds for a matrix of size
+	 *                                  {@code numQubits}.
 	 */
 	private ComplexMatrix swapQubitsMatrix(int numQubits, int bit1, int bit2) {
 
@@ -165,16 +175,26 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 	}
 
 	/**
-	 * Retrieves the complex matrix representation of the quantum gate.
+	 * Returns the complex matrix representation of the quantum gate.
 	 *
 	 * @return The complex matrix of the quantum gate.
 	 */
 	public ComplexMatrix asMatrix() {
 		return this.matrix;
 	}
-	
+
+	/**
+	 * Combines the current quantum gate with another combinable circuit modifier.
+	 * The combination is performed by multiplying the matrices representing both
+	 * modifiers. This method is part of the {@link CombinableCircuitModifier}
+	 * interface.
+	 *
+	 * @param c The combinable circuit modifier to be combined with the current
+	 *          quantum gate.
+	 * @return A new circuit modifier representing the combination of the two
+	 *         modifiers.
+	 */
 	public CircuitModifier combine(CombinableCircuitModifier c) {
-		
 		return this.asMatrix().mult(c.asMatrix());
 	}
 

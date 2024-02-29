@@ -1,9 +1,16 @@
 package squire.test;
 
+import java.util.stream.IntStream;
+
 import squire.circuit.QuantumGate;
+import squire.circuit.StateVector;
 import squire.circuit.gates.CNOTGate;
 import squire.circuit.gates.HGate;
 import squire.circuit.gates.IGate;
+import squire.circuit.gates.RXGate;
+import squire.circuit.gates.RYGate;
+import squire.circuit.gates.RZGate;
+import squire.complex.ComplexMatrix;
 
 public class QuantumGateTests {
 
@@ -19,7 +26,37 @@ public class QuantumGateTests {
 		mediumCNOTTest();
 		mediumCNOTTest2();
 		mediumCNOTTest3();
+		rotations(10);
 		System.out.println("Finished quantum gate tests!");
+	}
+
+	public static void rotations(int n) {
+
+		int numQubits = 2;
+
+		StateVector sv = StateVector.createZeroState(numQubits);
+
+		for (int q = 0; q < numQubits; q++) {
+			final int qval = q;
+			double[] rxs = IntStream.range(0, n).mapToDouble((i) -> (Math.sqrt(i + qval) * 2 * Math.PI * i / 3))
+					.toArray();
+			double[] rys = IntStream.range(0, n).mapToDouble((i) -> (Math.sqrt(i + qval) * 2 * Math.PI * i / 5))
+					.toArray();
+			double[] rzs = IntStream.range(0, n).mapToDouble((i) -> (Math.sqrt(i + qval) * 2 * Math.PI * i / 7))
+					.toArray();
+
+			for (int i = 0; i < n; i++) {
+				ComplexMatrix rxmat = new RXGate(numQubits, q, rxs[i]).asMatrix();
+				ComplexMatrix rymat = new RYGate(numQubits, q, rys[i]).asMatrix();
+				ComplexMatrix rzmat = new RZGate(numQubits, q, rzs[i]).asMatrix();
+				sv = sv.applyMatrix(rxmat);
+				sv = sv.applyMatrix(rymat);
+				sv = sv.applyMatrix(rzmat);
+			}
+		}
+
+		System.out.println(sv);
+
 	}
 
 	private static void smallIdentityTest() {
