@@ -181,11 +181,11 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	 * @return The result of the multiplication.
 	 */
 	public ComplexMatrix mult(ComplexMatrix that) {
-		
-		
+
 		if (!this.cols.equals(that.rows)) {
-			throw new IllegalArgumentException(
-					"Number of columns in the first matrix (" + this.cols + ") must be equal to the number of rows in the second matrix (" + that.rows+ ") for multiplication.");
+			throw new IllegalArgumentException("Number of columns in the first matrix (" + this.cols
+					+ ") must be equal to the number of rows in the second matrix (" + that.rows
+					+ ") for multiplication.");
 		}
 
 		ComplexMatrix result = new ComplexMatrix(this.rows, that.cols);
@@ -262,7 +262,7 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	 */
 	public ComplexMatrix tensor(ComplexMatrix other) {
 		ComplexMatrix result = new ComplexMatrix(this.rows.multiply(other.rows), this.cols.multiply(other.cols));
-		
+
 		for (BigInteger i = BigInteger.ZERO; i.compareTo(this.rows) < 0; i = i.add(BigInteger.ONE)) {
 			for (BigInteger j = BigInteger.ZERO; j.compareTo(this.cols) < 0; j = j.add(BigInteger.ONE)) {
 				for (BigInteger k = BigInteger.ZERO; k.compareTo(other.rows) < 0; k = k.add(BigInteger.ONE)) {
@@ -285,7 +285,8 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	public ComplexNumber det() {
 		// Check if the matrix is square
 		if (!this.rows.equals(this.cols)) {
-			throw new UnsupportedOperationException("Determinant is only defined for square matrices, this matrix is " + this.rows + "x" + this.cols);
+			throw new UnsupportedOperationException(
+					"Determinant is only defined for square matrices, this matrix is " + this.rows + "x" + this.cols);
 		}
 
 		// Create a copy of the matrix to avoid modifying the original

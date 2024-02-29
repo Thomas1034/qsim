@@ -225,7 +225,7 @@ public class ComplexNumber {
 	 */
 	@Override
 	public String toString() {
-		return this.real + " + " + this.imag + "i";
+		return "(" + this.real + (this.imag > 0 ? "+" : "") + this.imag + "i)";
 	}
 
 	/**

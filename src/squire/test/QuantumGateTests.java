@@ -31,6 +31,8 @@ public class QuantumGateTests {
 	}
 
 	public static void rotations(int n) {
+		System.out.println(
+				"Expected result: a rotated state to compare to qiskit, to check the validity of the rotation gates.");
 
 		int numQubits = 2;
 
