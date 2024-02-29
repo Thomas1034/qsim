@@ -3,13 +3,14 @@ package squire.complex;
 import java.math.BigInteger;
 
 import squire.circuit.CircuitModifier;
+import squire.circuit.CombinableCircuitModifier;
 import squire.circuit.StateVector;
 
 /**
  * Represents a matrix of complex numbers. With the gracious assistance of
  * ChatGPT.
  */
-public class ComplexMatrix implements CircuitModifier {
+public class ComplexMatrix implements CombinableCircuitModifier {
 
 	private final BigInteger rows;
 	private final BigInteger cols;
@@ -424,6 +425,16 @@ public class ComplexMatrix implements CircuitModifier {
 	@Override
 	public StateVector apply(StateVector state) {
 		return state.applyMatrix(this);
+	}
+
+	@Override
+	public CircuitModifier combine(CombinableCircuitModifier c) {
+		return this.mult(c.asMatrix());
+	}
+
+	@Override
+	public ComplexMatrix asMatrix() {
+		return this;
 	}
 
 }

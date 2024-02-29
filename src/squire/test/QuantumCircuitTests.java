@@ -7,11 +7,11 @@ import squire.circuit.QuantumCircuitSimulator;
 public class QuantumCircuitTests {
 
 	public static void run(int n) {
-		//smallHadamardTest(n);
-		//largeHadamardTest(n);
-		//smallEntanglingTest(n);
-		//largeEntanglingTest(n);
-		//teleportationTest(n);
+		smallHadamardTest(n);
+		largeHadamardTest(n);
+		smallEntanglingTest(n);
+		largeEntanglingTest(n);
+		teleportationTest(n);
 		bellStateTest(n);
 	}
 
@@ -83,26 +83,30 @@ public class QuantumCircuitTests {
 	
 	private static void bellStateTest(int tries) {
 		System.out.println("Bell states:");
+		System.out.println("Bell 0:");
 		QuantumCircuitSimulator qc0 = new QuantumCircuitSimulator(2, new Random());
 		qc0.h(0);
 		qc0.cx(1, 0);
-		testCircuit(qc0, tries);
+		testCircuitWithDebug(qc0, tries);
+		System.out.println("Bell 1:");
 		QuantumCircuitSimulator qc1 = new QuantumCircuitSimulator(2, new Random());
 		qc1.x(0);
 		qc1.h(0);
 		qc1.cx(1, 0);
-		testCircuit(qc1, tries);
+		testCircuitWithDebug(qc1, tries);
+		System.out.println("Bell 2:");
 		QuantumCircuitSimulator qc2 = new QuantumCircuitSimulator(2, new Random());
 		qc2.x(1);
 		qc2.h(0);
 		qc2.cx(1, 0);
-		testCircuit(qc2, tries);
+		testCircuitWithDebug(qc2, tries);
+		System.out.println("Bell 3:");
 		QuantumCircuitSimulator qc3 = new QuantumCircuitSimulator(2, new Random());
 		qc3.x(0);
 		qc3.x(1);
 		qc3.h(0);
 		qc3.cx(1, 0);
-		testCircuit(qc3, tries);
+		testCircuitWithDebug(qc3, tries);
 	}
 
 	private static void testCircuit(QuantumCircuitSimulator qc, int tries) {
@@ -110,6 +114,24 @@ public class QuantumCircuitTests {
 		int[] successes = new int[qc.countQubits()];
 		for (int i = 0; i < tries; i++) {
 			boolean[] temp = qc.run();
+			//if (i % 50 == 0) {
+			//	System.out.println("Test " + i + " produced " + Arrays.toString(temp));
+			//}
+			for (int j = 0; j < temp.length; j++) {
+				successes[j] += temp[j] ? 1 : 0;
+			}
+		}
+
+		for (int i = 0; i < successes.length; i++) {
+			System.out.println("Qubit[" + i + "] was true: " + successes[i] + "/" + tries);
+		}
+	}
+	
+	private static void testCircuitWithDebug(QuantumCircuitSimulator qc, int tries) {
+
+		int[] successes = new int[qc.countQubits()];
+		for (int i = 0; i < tries; i++) {
+			boolean[] temp = qc.run(true);
 			//if (i % 50 == 0) {
 			//	System.out.println("Test " + i + " produced " + Arrays.toString(temp));
 			//}

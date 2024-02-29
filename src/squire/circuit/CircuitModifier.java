@@ -1,5 +1,5 @@
 package squire.circuit;
 
-public interface CircuitModifier {
+public sealed interface CircuitModifier permits CombinableCircuitModifier, UncombinableCircuitModifier {
 	public StateVector apply(StateVector state);
 }

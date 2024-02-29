@@ -7,7 +7,7 @@ import java.util.HashSet;
 import squire.complex.ComplexMatrix;
 import squire.complex.ComplexNumber;
 
-public abstract class QuantumGate implements CircuitModifier {
+public abstract class QuantumGate implements CombinableCircuitModifier {
 
 	private ComplexMatrix matrix;
 	private ComplexMatrix originalMatrix;
@@ -172,4 +172,10 @@ public abstract class QuantumGate implements CircuitModifier {
 	public ComplexMatrix asMatrix() {
 		return this.matrix;
 	}
+	
+	public CircuitModifier combine(CombinableCircuitModifier c) {
+		
+		return this.asMatrix().mult(c.asMatrix());
+	}
+
 }

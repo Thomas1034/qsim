@@ -2,10 +2,10 @@ package squire.circuit.gates;
 
 import java.util.Random;
 
-import squire.circuit.CircuitModifier;
 import squire.circuit.StateVector;
+import squire.circuit.UncombinableCircuitModifier;
 
-public class Measurement implements CircuitModifier {
+public class Measurement implements UncombinableCircuitModifier {
 
 	private int target;
 	private Random random;
