@@ -8,8 +8,17 @@ public class ComplexNumber {
 
 	private final double real;
 	private final double imag;
+	/**
+	 * An instance of ComplexNumber holding the value 0.
+	 */
 	public static final ComplexNumber ZERO = new ComplexNumber(0, 0);
+	/**
+	 * An instance of ComplexNumber holding the value 1.
+	 */
 	public static final ComplexNumber ONE = new ComplexNumber(1, 0);
+	/**
+	 * An instance of ComplexNumber holding the imaginary value i.
+	 */
 	public static final ComplexNumber I = new ComplexNumber(0, 1);
 
 	/**
@@ -63,7 +72,7 @@ public class ComplexNumber {
 	 * Adds another complex number to this complex number.
 	 *
 	 * @param that The complex number to be added.
-	 * @return The result of the addition.
+	 * @return The result of the addition, as a new object.
 	 */
 	public ComplexNumber add(ComplexNumber that) {
 		return new ComplexNumber(this.real + that.real, this.imag + that.imag);
@@ -73,7 +82,7 @@ public class ComplexNumber {
 	 * Adds a real value to the real part of this complex number.
 	 *
 	 * @param val The real value to be added.
-	 * @return The result of the addition.
+	 * @return The result of the addition, as a new object.
 	 */
 	public ComplexNumber add(double val) {
 		return new ComplexNumber(this.real + val, this.imag);
@@ -83,7 +92,7 @@ public class ComplexNumber {
 	 * Adds an imaginary value to the imaginary part of this complex number.
 	 *
 	 * @param val The imaginary value to be added.
-	 * @return The result of the addition.
+	 * @return The result of the addition, as a new object.
 	 */
 	public ComplexNumber iadd(double val) {
 		return new ComplexNumber(this.real, this.imag + val);
@@ -93,7 +102,7 @@ public class ComplexNumber {
 	 * Subtracts another complex number from this complex number.
 	 *
 	 * @param that The complex number to be subtracted.
-	 * @return The result of the subtraction.
+	 * @return The result of the subtraction, as a new object.
 	 */
 	public ComplexNumber sub(ComplexNumber that) {
 		return new ComplexNumber(this.real - that.real, this.imag - that.imag);
@@ -103,7 +112,7 @@ public class ComplexNumber {
 	 * Subtracts a real value from the real part of this complex number.
 	 *
 	 * @param val The real value to be subtracted.
-	 * @return The result of the subtraction.
+	 * @return The result of the subtraction, as a new object.
 	 */
 	public ComplexNumber sub(double val) {
 		return new ComplexNumber(this.real - val, this.imag);
@@ -113,7 +122,7 @@ public class ComplexNumber {
 	 * Subtracts an imaginary value from the imaginary part of this complex number.
 	 *
 	 * @param val The imaginary value to be subtracted.
-	 * @return The result of the subtraction.
+	 * @return The result of the subtraction, as a new object.
 	 */
 	public ComplexNumber isub(double val) {
 		return new ComplexNumber(this.real, this.imag - val);
@@ -132,7 +141,7 @@ public class ComplexNumber {
 	 * Divides this complex number by another complex number.
 	 *
 	 * @param that The complex number to divide by.
-	 * @return The result of the division.
+	 * @return The result of the division, as a new object.
 	 */
 	public ComplexNumber div(ComplexNumber that) {
 		double mag = this.mag();
@@ -143,7 +152,7 @@ public class ComplexNumber {
 	 * Divides this complex number by a real value.
 	 *
 	 * @param val The real value to divide by.
-	 * @return The result of the division.
+	 * @return The result of the division, as a new object.
 	 */
 	public ComplexNumber div(double val) {
 		return new ComplexNumber(this.real / val, this.imag / val);
@@ -153,7 +162,7 @@ public class ComplexNumber {
 	 * Multiplies this complex number by another complex number (helper method).
 	 *
 	 * @param that The complex number to multiply by.
-	 * @return The result of the multiplication.
+	 * @return The result of the multiplication, as a new object.
 	 */
 	public ComplexNumber mult(ComplexNumber that) {
 		double newReal = this.real * that.real - this.imag * that.imag;
@@ -165,21 +174,23 @@ public class ComplexNumber {
 	 * Multiplies this complex number by a real value.
 	 *
 	 * @param val The real value to multiply by.
-	 * @return The result of the multiplication.
+	 * @return The result of the multiplication, as a new object.
 	 */
 	public ComplexNumber mult(double val) {
 		return new ComplexNumber(this.real * val, this.imag * val);
 	}
 
 	/**
-	 * Returns e raised to this complex number, using Euler's formula.
+	 * Returns <i>e</i> raised to this complex number, using Euler's formula.
 	 *
-	 * @return The result of the exponentiation.
+	 * @return The result of the exponentiation, as a new object.
+	 * 
+	 * @see Math
 	 */
 	public ComplexNumber exp() {
 		if (this.equals(ZERO)) {
 			return ComplexNumber.ONE;
-		}		
+		}
 		double efactor = Math.exp(this.real);
 		double rpart = efactor * Math.cos(this.imag());
 		double ipart = efactor * Math.sin(this.imag());
@@ -191,14 +202,16 @@ public class ComplexNumber {
 	 *
 	 * @param magnitude The magnitude of the complex number.
 	 * @param phase     The phase of the complex number.
-	 * @return The complex number in rectangular form.
+	 * 
+	 * @return The complex number in rectangular form, as a new object.
+	 * 
+	 * @see Math
 	 */
 	public static ComplexNumber fromPolar(double magnitude, double phase) {
 		double real = magnitude * Math.cos(phase);
 		double imag = magnitude * Math.sin(phase);
 		return new ComplexNumber(real, imag);
 	}
-	
 
 	/**
 	 * Checks if two complex numbers are approximately equal.
@@ -230,7 +243,8 @@ public class ComplexNumber {
 
 	/**
 	 * Returns the negation of this complex number.
-	 * @return The negation of this complex number.
+	 * 
+	 * @return The negation of this complex number, as a new object.
 	 */
 	public ComplexNumber neg() {
 		return new ComplexNumber(-this.real, -this.imag);

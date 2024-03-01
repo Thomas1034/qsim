@@ -19,16 +19,18 @@ import squire.circuit.gates.YGate;
 import squire.circuit.gates.ZGate;
 
 /**
- * QuantumCircuitSimulator represents a quantum circuit simulator capable of
- * simulating the evolution of a quantum circuit and measuring its final state.
+ * {@code QuantumCircuitSimulator} represents a quantum circuit simulator
+ * capable of simulating the evolution of a quantum circuit and measuring its
+ * final state.
+ * 
  * The class allows users to construct quantum circuits by adding various
  * quantum gates and perform simulations to obtain measurement outcomes.
  *
- * QuantumCircuitSimulator utilizes a StateVector to represent the quantum state
- * of the system and applies QuantumGate and Measurement operations to simulate
- * the evolution of the quantum circuit. The class supports optimization
- * techniques to improve simulation efficiency by combining adjacent gates when
- * possible.
+ * {@code QuantumCircuitSimulator} utilizes a {@link StateVector} to represent
+ * the quantum state of the system and applies {@link QuantumGate} and {@link Measurement}
+ * operations to simulate the evolution of the quantum circuit. The class
+ * supports optimization techniques to improve simulation efficiency by
+ * combining adjacent gates when possible.
  *
  * @see CircuitModifier
  * @see QuantumGate
@@ -41,7 +43,7 @@ public class QuantumCircuitSimulator {
 
 	/**
 	 * List of quantum gates representing the sequence of operations in the quantum
-	 * circuit. Each element is a CircuitModifier, which can be a quantum gate or
+	 * circuit. Each element is a {@link CircuitModifier}, which can be a quantum gate or
 	 * measurement operation.
 	 *
 	 * @see CircuitModifier
