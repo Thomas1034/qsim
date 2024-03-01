@@ -2,12 +2,28 @@ package squire.circuit;
 
 import java.util.Objects;
 
-public record UnorderedPair(int x, int y) {
+public class UnorderedPair {
+	
+	private final int x;
+	private final int y;
+	
+	public UnorderedPair(int x, int y) {
+		this.x = Math.max(x, y);
+		this.y = Math.min(x, y);
+	}
 	
 	// Order does not matter.
 	@Override
 	public int hashCode() {
-		return Objects.hash(Integer.hashCode(Math.max(y, x)), Integer.hashCode(Math.min(y, x)));
+		return Objects.hash(x, y);
+	}
+	
+	public int x() {
+		return this.x;
+	}
+	
+	public int y() {
+		return this.y;
 	}
 	
 	// Override equality.
@@ -18,7 +34,7 @@ public record UnorderedPair(int x, int y) {
 		}
 		if (obj instanceof UnorderedPair that) {
 			
-			return Math.max(this.y, this.x) == Math.max(that.y, that.x) && Math.min(this.y, this.x) == Math.min(that.y, that.x);
+			return this.x == that.x && this.y == that.y;
 		}
 		return false;
 		
