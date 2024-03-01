@@ -59,12 +59,20 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	 * Creates a zero matrix of the specified size.
 	 *
 	 * @param size The size of the zero matrix (number of rows and columns).
+	 * 
 	 * @return The zero matrix.
 	 */
 	public static ComplexMatrix zero(int size) {
 		return new ComplexMatrix(size, size);
 	}
 
+	/**
+	 * Creates a matrix duplicating a BigInteger 2d array.
+	 *
+	 * @param arr The array to duplicate.
+	 * 
+	 * @return A matrix containing the same contents as the BigInteger array arr.
+	 */
 	public static ComplexMatrix fromArray(BigInteger[][] arr) {
 
 		ComplexMatrix result = new ComplexMatrix(arr.length, arr[0].length);
@@ -124,6 +132,8 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	 * @param row   The row index.
 	 * @param col   The column index.
 	 * @param value The complex number to set.
+	 * 
+	 * @return This matrix, with the value set as specified.
 	 */
 	public ComplexMatrix set(int row, int col, ComplexNumber value) {
 		this.set(BigInteger.valueOf(row), BigInteger.valueOf(col), value);
@@ -376,15 +386,21 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 	}
 
 	/**
-	 * Checks if two matrices are equal.
+	 * Checks if two objects are equal. If the superclass implementation of .equals
+	 * returns true, this method will return true.
+	 * 
+	 * If the other object is a ComplexMatrix with identical contents, this method
+	 * will return true.
+	 * 
+	 * Otherwise, this method will return false.
 	 *
-	 * @param other The matrix to compare with.
-	 * @return True if the matrices are equal, false otherwise.
+	 * @param obj The object to compare with.
+	 * @return True if the objects are equal, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {
 
-		if (obj == this) {
+		if (super.equals(obj)) {
 			return true;
 		}
 

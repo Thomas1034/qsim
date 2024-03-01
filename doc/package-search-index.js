@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"squire.circuit"},{"l":"squire.circuit.gates"},{"l":"squire.complex"},{"l":"squire.test"}];updateSearchResults();

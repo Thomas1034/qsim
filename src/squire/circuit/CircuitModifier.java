@@ -17,15 +17,14 @@ public sealed interface CircuitModifier permits CombinableCircuitModifier, Uncom
 	/**
 	 * Applies the circuit modification to the given quantum state vector.
 	 *
+	 * Implementing classes must define the specific transformation applied to the
+	 * state vector. The modification is applied directly to the provided state
+	 * vector without modifying its internal state.
+	 *
 	 * @param state The quantum state vector to which the circuit modification is
 	 *              applied.
 	 * @return The resulting quantum state vector after applying the circuit
 	 *         modification.
-	 *
-	 * @implNote Implementing classes must define the specific transformation
-	 *           applied to the state vector.
-	 * @implNote The modification is applied directly to the provided state vector
-	 *           without modifying its internal state.
 	 */
 	public StateVector apply(StateVector state);
 }

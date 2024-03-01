@@ -70,20 +70,18 @@ public class QuantumCircuitSimulator {
 	 * Initializes a Quantum Circuit Simulator with the specified number of qubits
 	 * and a Random object for generating random values.
 	 *
+	 * The constructor initializes the Quantum Circuit Simulator with the given
+	 * number of qubits and a list of quantum gates. It starts with an Identity (I)
+	 * gate applied to the first qubit (index 0) to ensure a valid initial state.
+	 * The Random object is used for generating random values during the simulation,
+	 * facilitating operations like measurements.
+	 *
+	 * The initial Identity (I) gate ensures that the quantum circuit starts in a
+	 * well-defined state before any additional gates are applied.
+	 *
 	 * @param n      The number of qubits in the quantum circuit.
 	 * @param random The Random object used for generating random values during the
 	 *               simulation.
-	 *
-	 * @implNote The constructor initializes the Quantum Circuit Simulator with the
-	 *           given number of qubits and a list of quantum gates. It starts with
-	 *           an Identity (I) gate applied to the first qubit (index 0) to ensure
-	 *           a valid initial state. The Random object is used for generating
-	 *           random values during the simulation, facilitating operations like
-	 *           measurements.
-	 *
-	 * @implNote The initial Identity (I) gate ensures that the quantum circuit
-	 *           starts in a well-defined state before any additional gates are
-	 *           applied.
 	 *
 	 * @see QuantumCircuitSimulator
 	 * @see QuantumGate
@@ -113,19 +111,19 @@ public class QuantumCircuitSimulator {
 	 * Adds a Hadamard (H) gate operation to the quantum circuit, creating a
 	 * superposition of states on the specified qubit.
 	 *
+	 *
+	 * The method creates a Hadamard (H) gate operation with the given qubit index
+	 * and adds it to the quantum circuit. The Hadamard gate is a single-qubit gate
+	 * that creates a superposition of states on the targeted qubit.
+	 *
+	 * The Hadamard gate is added to the circuit, and its application will modify
+	 * the state vector during the quantum circuit execution, introducing a
+	 * superposition of states to the targeted qubit.
+	 *
 	 * @param q The index of the qubit to which the Hadamard gate is applied.
-	 *
-	 * @implNote The method creates a Hadamard (H) gate operation with the given
-	 *           qubit index and adds it to the quantum circuit. The Hadamard gate
-	 *           is a single-qubit gate that creates a superposition of states on
-	 *           the targeted qubit.
-	 *
-	 * @implNote The Hadamard gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing a superposition of states to the targeted qubit.
-	 *
+	 * 
 	 * @see HGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void h(int q) {
@@ -137,21 +135,20 @@ public class QuantumCircuitSimulator {
 	 * Adds a Controlled-X (CNOT) gate operation to the quantum circuit, applying a
 	 * bit flip to the target qubit based on the state of the control qubit.
 	 *
+	 * The method creates a Controlled-X (CNOT) gate operation with the given qubit
+	 * indices and adds it to the quantum circuit. The CNOT gate performs a bit flip
+	 * on the target qubit if and only if the state of the control qubit is |1>.
+	 *
+	 * The CNOT gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing conditional
+	 * bit flips based on the control qubit state.
+	 *
 	 * @param q The index of the target qubit on which the CNOT gate is applied.
 	 * @param c The index of the control qubit that influences the CNOT gate
 	 *          operation.
 	 *
-	 * @implNote The method creates a Controlled-X (CNOT) gate operation with the
-	 *           given qubit indices and adds it to the quantum circuit. The CNOT
-	 *           gate performs a bit flip on the target qubit if and only if the
-	 *           state of the control qubit is |1>.
-	 *
-	 * @implNote The CNOT gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing conditional bit flips based on the control qubit state.
-	 *
 	 * @see CNOTGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void cx(int q, int c) {
@@ -163,19 +160,18 @@ public class QuantumCircuitSimulator {
 	 * Adds a Pauli-X (X) gate operation to the quantum circuit, performing a bit
 	 * flip on the specified qubit.
 	 *
+	 * The method creates a Pauli-X (X) gate operation with the given qubit index
+	 * and adds it to the quantum circuit. The Pauli-X gate is a single-qubit gate
+	 * that performs a bit flip on the state of the targeted qubit.
+	 *
+	 * The Pauli-X gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing a bit flip to
+	 * the targeted qubit.
+	 *
 	 * @param q The index of the qubit to which the Pauli-X gate is applied.
 	 *
-	 * @implNote The method creates a Pauli-X (X) gate operation with the given
-	 *           qubit index and adds it to the quantum circuit. The Pauli-X gate is
-	 *           a single-qubit gate that performs a bit flip on the state of the
-	 *           targeted qubit.
-	 *
-	 * @implNote The Pauli-X gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing a bit flip to the targeted qubit.
-	 *
 	 * @see XGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void x(int q) {
@@ -187,13 +183,13 @@ public class QuantumCircuitSimulator {
 	 * Adds a Pauli-Y (Y) gate operation to the quantum circuit on the specified
 	 * qubit.
 	 *
-	 * @param q The index of the qubit to which the Pauli-Y gate is applied.
+	 * The method creates a Pauli-Y (Y) gate operation with the given qubit index
+	 * and adds it to the quantum circuit.
 	 *
-	 * @implNote The method creates a Pauli-Y (Y) gate operation with the given
-	 *           qubit index and adds it to the quantum circuit.
+	 * @param q The index of the qubit to which the Pauli-Y gate is applied.
 	 * 
 	 * @see YGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void y(int q) {
@@ -205,19 +201,18 @@ public class QuantumCircuitSimulator {
 	 * Adds a Pauli-Z (Z) gate operation to the quantum circuit, performing a π
 	 * phase flip on the specified qubit.
 	 *
+	 * The method creates a Pauli-Z (Z) gate operation with the given qubit index
+	 * and adds it to the quantum circuit. The Pauli-Z gate is a single-qubit gate
+	 * that performs a π phase flip on the state of the targeted qubit.
+	 *
+	 * The Pauli-Z gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing a π phase flip
+	 * to the targeted qubit.
+	 *
 	 * @param q The index of the qubit to which the Pauli-Z gate is applied.
 	 *
-	 * @implNote The method creates a Pauli-Z (Z) gate operation with the given
-	 *           qubit index and adds it to the quantum circuit. The Pauli-Z gate is
-	 *           a single-qubit gate that performs a π phase flip on the state of
-	 *           the targeted qubit.
-	 *
-	 * @implNote The Pauli-Z gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing a π phase flip to the targeted qubit.
-	 *
 	 * @see ZGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void z(int q) {
@@ -229,19 +224,19 @@ public class QuantumCircuitSimulator {
 	 * Adds an Identity (I) gate operation to the quantum circuit, performing no
 	 * operation on the specified qubit.
 	 *
+	 * The method creates an Identity (I) gate operation with the given qubit index
+	 * and adds it to the quantum circuit. The Identity gate is a single-qubit gate
+	 * that performs no operation, leaving the state of the targeted qubit
+	 * unchanged.
+	 *
+	 * The Identity gate is added to the circuit, and its application will have no
+	 * effect on the state vector during the quantum circuit execution for the
+	 * targeted qubit.
+	 * 
 	 * @param q The index of the qubit to which the Identity gate is applied.
 	 *
-	 * @implNote The method creates an Identity (I) gate operation with the given
-	 *           qubit index and adds it to the quantum circuit. The Identity gate
-	 *           is a single-qubit gate that performs no operation, leaving the
-	 *           state of the targeted qubit unchanged.
-	 *
-	 * @implNote The Identity gate is added to the circuit, and its application will
-	 *           have no effect on the state vector during the quantum circuit
-	 *           execution for the targeted qubit.
-	 *
 	 * @see IGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void i(int q) {
@@ -253,21 +248,21 @@ public class QuantumCircuitSimulator {
 	 * Adds an Rx gate operation to the quantum circuit, rotating the specified
 	 * qubit around the X-axis by a given angle.
 	 *
+	 * The method creates an Rx gate operation with the given qubit index and
+	 * rotation angle and adds it to the quantum circuit. The Rx gate is a
+	 * single-qubit gate that performs a rotation around the X-axis by the specified
+	 * angle.
+	 *
+	 * The Rx gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing the specified
+	 * X-axis rotation to the targeted qubit.
+	 *
 	 * @param q     The index of the qubit to be rotated.
 	 * @param theta The angle (in radians) by which the qubit is rotated around the
 	 *              Z-axis.
 	 *
-	 * @implNote The method creates an Rx gate operation with the given qubit index
-	 *           and rotation angle and adds it to the quantum circuit. The Rx gate
-	 *           is a single-qubit gate that performs a rotation around the X-axis
-	 *           by the specified angle.
-	 *
-	 * @implNote The Rx gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing the specified X-axis rotation to the targeted qubit.
-	 *
 	 * @see RXGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void rx(int q, double theta) {
@@ -279,21 +274,21 @@ public class QuantumCircuitSimulator {
 	 * Adds an Ry gate operation to the quantum circuit, rotating the specified
 	 * qubit around the Y-axis by a given angle.
 	 *
+	 * The method creates an Ry gate operation with the given qubit index and
+	 * rotation angle and adds it to the quantum circuit. The Ry gate is a
+	 * single-qubit gate that performs a rotation around the Y-axis by the specified
+	 * angle.
+	 *
+	 * The Ry gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing the specified
+	 * Y-axis rotation to the targeted qubit.
+	 *
 	 * @param q     The index of the qubit to be rotated.
 	 * @param theta The angle (in radians) by which the qubit is rotated around the
 	 *              Z-axis.
 	 *
-	 * @implNote The method creates an Ry gate operation with the given qubit index
-	 *           and rotation angle and adds it to the quantum circuit. The Ry gate
-	 *           is a single-qubit gate that performs a rotation around the Y-axis
-	 *           by the specified angle.
-	 *
-	 * @implNote The Ry gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing the specified Y-axis rotation to the targeted qubit.
-	 *
 	 * @see RYGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void ry(int q, double theta) {
@@ -305,21 +300,20 @@ public class QuantumCircuitSimulator {
 	 * Adds an Rz gate operation to the quantum circuit, rotating the specified
 	 * qubit around the Z-axis by a given angle.
 	 *
+	 * The method creates an Rz gate operation with the given qubit index and
+	 * rotation angle and adds it to the quantum circuit. The Rz gate is a
+	 * single-qubit gate that performs a rotation around the Z-axis by the specified
+	 * angle.
+	 *
+	 * The Rz gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing the specified
+	 * Z-axis rotation to the targeted qubit.
+	 *
 	 * @param q     The index of the qubit to be rotated.
 	 * @param theta The angle (in radians) by which the qubit is rotated around the
 	 *              Z-axis.
-	 *
-	 * @implNote The method creates an Rz gate operation with the given qubit index
-	 *           and rotation angle and adds it to the quantum circuit. The Rz gate
-	 *           is a single-qubit gate that performs a rotation around the Z-axis
-	 *           by the specified angle.
-	 *
-	 * @implNote The Rz gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing the specified Z-axis rotation to the targeted qubit.
-	 *
 	 * @see RZGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void rz(int q, double theta) {
@@ -331,19 +325,18 @@ public class QuantumCircuitSimulator {
 	 * Adds an S gate operation to the quantum circuit, applying a π/2 phase shift
 	 * to the specified qubit.
 	 *
+	 * The method creates an S gate operation with the given qubit index and adds it
+	 * to the quantum circuit. The S gate is a single-qubit gate that introduces a
+	 * π/2 phase shift (square root of Z gate) to the state of the specified qubit.
+	 *
+	 * The S gate is added to the circuit, and its application will modify the state
+	 * vector during the quantum circuit execution, introducing the π/2 phase shift
+	 * to the targeted qubit.
+	 *
 	 * @param q The index of the qubit on which the S gate is applied.
 	 *
-	 * @implNote The method creates an S gate operation with the given qubit index
-	 *           and adds it to the quantum circuit. The S gate is a single-qubit
-	 *           gate that introduces a π/2 phase shift (square root of Z gate) to
-	 *           the state of the specified qubit.
-	 *
-	 * @implNote The S gate is added to the circuit, and its application will modify
-	 *           the state vector during the quantum circuit execution, introducing
-	 *           the π/2 phase shift to the targeted qubit.
-	 *
 	 * @see SGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void s(int q) {
@@ -354,20 +347,20 @@ public class QuantumCircuitSimulator {
 	/**
 	 * Adds a T gate operation to the quantum circuit, applying a π/4 phase shift to
 	 * the specified qubit.
+	 * 
+	 * The method creates a T gate operation with the given qubit index and adds it
+	 * to the quantum circuit. The T gate is a single-qubit gate that introduces a
+	 * π/4 phase shift to the state of the specified qubit.
+	 *
+	 * The T gate is added to the circuit, and its application will modify the state
+	 * vector during the quantum circuit execution, introducing the π/4 phase shift
+	 * to the targeted qubit.
 	 *
 	 * @param q The index of the qubit on which the T gate is applied.
 	 *
-	 * @implNote The method creates a T gate operation with the given qubit index
-	 *           and adds it to the quantum circuit. The T gate is a single-qubit
-	 *           gate that introduces a π/4 phase shift to the state of the
-	 *           specified qubit.
-	 *
-	 * @implNote The T gate is added to the circuit, and its application will modify
-	 *           the state vector during the quantum circuit execution, introducing
-	 *           the π/4 phase shift to the targeted qubit.
 	 *
 	 * @see TGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void t(int q) {
@@ -377,23 +370,21 @@ public class QuantumCircuitSimulator {
 
 	/**
 	 * Adds a Controlled-Z (CZ) gate operation to the quantum circuit.
+	 * 
+	 * The method creates a Controlled-Z (CZ) gate operation with the given qubit
+	 * indices and adds it to the quantum circuit. The CZ gate introduces a phase
+	 * shift in the target qubit based on the state of the control qubit.
+	 *
+	 * The CZ gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing conditional
+	 * phase shifts based on the control qubit state.
 	 *
 	 * @param q The index of the target qubit on which the CZ gate is applied.
 	 * @param c The index of the control qubit that influences the CZ gate
 	 *          operation.
 	 *
-	 * @implNote The method creates a Controlled-Z (CZ) gate operation with the
-	 *           given qubit indices and adds it to the quantum circuit. The CZ gate
-	 *           introduces a phase shift in the target qubit based on the state of
-	 *           the control qubit.
-	 *
-	 * @implNote The CZ gate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           introducing conditional phase shifts based on the control qubit
-	 *           state.
-	 *
 	 * @see CZGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void cz(int q, int c) {
@@ -405,19 +396,19 @@ public class QuantumCircuitSimulator {
 	 * Adds a SwapGate operation to the quantum circuit, swapping the states of two
 	 * specified qubits.
 	 *
+	 * The method creates a SwapGate operation with the given qubit indices and adds
+	 * it to the quantum circuit. SwapGate is a quantum gate that exchanges the
+	 * quantum states of two qubits.
+	 *
+	 * The SwapGate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, reflecting the swapping of
+	 * states between the specified qubits.
+	 *
 	 * @param q The index of the first qubit to be swapped.
 	 * @param c The index of the second qubit to be swapped.
 	 *
-	 * @implNote The method creates a SwapGate operation with the given qubit
-	 *           indices and adds it to the quantum circuit. SwapGate is a quantum
-	 *           gate that exchanges the quantum states of two qubits.
-	 *
-	 * @implNote The SwapGate is added to the circuit, and its application will
-	 *           modify the state vector during the quantum circuit execution,
-	 *           reflecting the swapping of states between the specified qubits.
-	 *
 	 * @see SwapGate
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void swap(int q, int c) {
@@ -428,22 +419,21 @@ public class QuantumCircuitSimulator {
 	/**
 	 * Adds a measurement operation to the quantum circuit for the specified qubit.
 	 *
+	 * The method adds a Measurement operation to the quantum circuit for the
+	 * specified qubit. Measurement operations are essential for extracting
+	 * classical information from a quantum system. The provided Random object is
+	 * used for generating random outcomes during the measurement process.
+	 *
+	 * The Measurement operation is added to the circuit, and it will affect the
+	 * subsequent evolution of the state vector during circuit execution.
+	 * Measurements collapse the quantum state, providing classical outcomes for the
+	 * measured qubits.
+	 *
 	 * @param q The index of the qubit to be measured.
 	 * @param r The Random object used for generating measurement outcomes.
 	 *
-	 * @implNote The method adds a Measurement operation to the quantum circuit for
-	 *           the specified qubit. Measurement operations are essential for
-	 *           extracting classical information from a quantum system. The
-	 *           provided Random object is used for generating random outcomes
-	 *           during the measurement process.
-	 *
-	 * @implNote The Measurement operation is added to the circuit, and it will
-	 *           affect the subsequent evolution of the state vector during circuit
-	 *           execution. Measurements collapse the quantum state, providing
-	 *           classical outcomes for the measured qubits.
-	 *
 	 * @see Measurement
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 * @see StateVector
 	 */
 	public void measure(int q, Random r) {
@@ -465,25 +455,21 @@ public class QuantumCircuitSimulator {
 	 * Executes the quantum circuit, simulating its evolution and measuring the
 	 * final state.
 	 *
+	 * The method initializes a StateVector with a zero state for the specified
+	 * number of qubits. It then adds measurement operations to the circuit for each
+	 * qubit, runs the quantum circuit by applying its gates, and finally measures
+	 * the resulting state vector.
+	 *
+	 * The StateVector is manipulated by applying CircuitModifier instances, which
+	 * represent quantum gates and measurement operations. The simulation proceeds
+	 * by applying each gate in the order they were added to the circuit.
+	 *
+	 * The measurement outcomes are obtained by applying measurement operations to
+	 * the final state vector. The boolean array returned corresponds to the
+	 * measured outcomes of each qubit in the circuit.
+	 *
 	 * @return An array of boolean values representing the measured outcomes of the
 	 *         qubits.
-	 *
-	 * @implNote The method initializes a StateVector with a zero state for the
-	 *           specified number of qubits. It then adds measurement operations to
-	 *           the circuit for each qubit, runs the quantum circuit by applying
-	 *           its gates, and finally measures the resulting state vector.
-	 *
-	 * @implNote The StateVector is manipulated by applying CircuitModifier
-	 *           instances, which represent quantum gates and measurement
-	 *           operations. The simulation proceeds by applying each gate in the
-	 *           order they were added to the circuit.
-	 *
-	 * @implNote The measurement outcomes are obtained by applying measurement
-	 *           operations to the final state vector. The boolean array returned
-	 *           corresponds to the measured outcomes of each qubit in the circuit.
-	 *
-	 * @return The boolean array representing the measured outcomes of the qubits
-	 *         after the circuit execution.
 	 *
 	 * @see StateVector
 	 * @see CircuitModifier
@@ -498,27 +484,23 @@ public class QuantumCircuitSimulator {
 	 * Executes the quantum circuit, simulating its evolution and measuring the
 	 * final state.
 	 *
+	 * The method initializes a StateVector with a zero state for the specified
+	 * number of qubits. It then adds measurement operations to the circuit for each
+	 * qubit, runs the quantum circuit by applying its gates, and finally measures
+	 * the resulting state vector.
+	 *
+	 * The StateVector is manipulated by applying CircuitModifier instances, which
+	 * represent quantum gates and measurement operations. The simulation proceeds
+	 * by applying each gate in the order they were added to the circuit. If the
+	 * debug parameter is true, the intermediate state vector is printed for
+	 * debugging purposes.
+	 *
+	 * The measurement outcomes are obtained by applying measurement operations to
+	 * the final state vector. The boolean array returned corresponds to the
+	 * measured outcomes of each qubit in the circuit.
+	 *
 	 * @param debug If true, prints the state vector after applying all gates for
 	 *              debugging purposes.
-	 *
-	 * @return An array of boolean values representing the measured outcomes of the
-	 *         qubits.
-	 *
-	 * @implNote The method initializes a StateVector with a zero state for the
-	 *           specified number of qubits. It then adds measurement operations to
-	 *           the circuit for each qubit, runs the quantum circuit by applying
-	 *           its gates, and finally measures the resulting state vector.
-	 *
-	 * @implNote The StateVector is manipulated by applying CircuitModifier
-	 *           instances, which represent quantum gates and measurement
-	 *           operations. The simulation proceeds by applying each gate in the
-	 *           order they were added to the circuit. If the debug parameter is
-	 *           true, the intermediate state vector is printed for debugging
-	 *           purposes.
-	 *
-	 * @implNote The measurement outcomes are obtained by applying measurement
-	 *           operations to the final state vector. The boolean array returned
-	 *           corresponds to the measured outcomes of each qubit in the circuit.
 	 *
 	 * @return The boolean array representing the measured outcomes of the qubits
 	 *         after the circuit execution.
@@ -568,25 +550,25 @@ public class QuantumCircuitSimulator {
 	 * of UncombinableCircuitModifier, and if so, attempts to simplify the circuit
 	 * by combining adjacent CombinableCircuitModifier gates in pairs. After the
 	 * simplification process, the provided gate is added to the circuit.
+	 * 
+	 * The method optimizes the circuit by iteratively combining pairs of adjacent
+	 * gates while preserving the order of UncombinableCircuitModifier gates. If the
+	 * provided gate is an instance of UncombinableCircuitModifier, the circuit is
+	 * simplified before adding the gate. The simplification process involves
+	 * merging adjacent CombinableCircuitModifier gates until no further
+	 * combinations are possible.
+	 *
+	 * The optimization process ensures that the circuit remains valid, and the
+	 * gates are combined based on the rules defined by the
+	 * CombinableCircuitModifier interface.
+	 *
+	 * The method has a time complexity of approximately O(lg r), where r is the
+	 * number of CombinableCircuitModifier gates in a row. However, the overall
+	 * complexity is influenced by the structure of the circuit and the type of
+	 * gates present.
 	 *
 	 * @param g The QuantumGate to be added to the circuit.
 	 *
-	 * @implNote The method optimizes the circuit by iteratively combining pairs of
-	 *           adjacent gates while preserving the order of
-	 *           UncombinableCircuitModifier gates. If the provided gate is an
-	 *           instance of UncombinableCircuitModifier, the circuit is simplified
-	 *           before adding the gate. The simplification process involves merging
-	 *           adjacent CombinableCircuitModifier gates until no further
-	 *           combinations are possible.
-	 *
-	 * @implNote The optimization process ensures that the circuit remains valid,
-	 *           and the gates are combined based on the rules defined by the
-	 *           CombinableCircuitModifier interface.
-	 *
-	 * @implNote The method has a time complexity of approximately O(lg r), where r
-	 *           is the number of CombinableCircuitModifier gates in a row. However,
-	 *           the overall complexity is influenced by the structure of the
-	 *           circuit and the type of gates present.
 	 *
 	 * @see QuantumGate
 	 * @see UncombinableCircuitModifier
@@ -629,24 +611,23 @@ public class QuantumCircuitSimulator {
 	 * by combining adjacent CombinableCircuitModifier gates in pairs. After the
 	 * simplification process, the provided gate is added to the circuit.
 	 *
+	 * The method optimizes the circuit by iteratively combining pairs of adjacent
+	 * gates while preserving the order of UncombinableCircuitModifier gates. If the
+	 * provided gate is an instance of UncombinableCircuitModifier, the circuit is
+	 * simplified before adding the gate. The simplification process involves
+	 * merging adjacent CombinableCircuitModifier gates until no further
+	 * combinations are possible.
+	 *
+	 * The optimization process ensures that the circuit remains valid, and the
+	 * gates are combined based on the rules defined by the
+	 * CombinableCircuitModifier interface.
+	 *
+	 * The method has a time complexity of approximately O(lg r), where r is the
+	 * number of CombinableCircuitModifier gates in a row. However, the overall
+	 * complexity is influenced by the structure of the circuit and the type of
+	 * gates present.
+	 *
 	 * @param g The QuantumGate to be added to the circuit.
-	 *
-	 * @implNote The method optimizes the circuit by iteratively combining pairs of
-	 *           adjacent gates while preserving the order of
-	 *           UncombinableCircuitModifier gates. If the provided gate is an
-	 *           instance of UncombinableCircuitModifier, the circuit is simplified
-	 *           before adding the gate. The simplification process involves merging
-	 *           adjacent CombinableCircuitModifier gates until no further
-	 *           combinations are possible.
-	 *
-	 * @implNote The optimization process ensures that the circuit remains valid,
-	 *           and the gates are combined based on the rules defined by the
-	 *           CombinableCircuitModifier interface.
-	 *
-	 * @implNote The method has a time complexity of approximately O(lg r), where r
-	 *           is the number of CombinableCircuitModifier gates in a row. However,
-	 *           the overall complexity is influenced by the structure of the
-	 *           circuit and the type of gates present.
 	 *
 	 * @see QuantumGate
 	 * @see UncombinableCircuitModifier
@@ -660,20 +641,20 @@ public class QuantumCircuitSimulator {
 	/**
 	 * Returns the number of qubits in the quantum circuit.
 	 *
+	 * The method retrieves the number of qubits stored in the circuit. Qubits are
+	 * fundamental units of quantum information, and their count indicates the size
+	 * or capacity of the quantum circuit.
+	 *
+	 * This function does not modify the circuit in any way.
+	 *
+	 * The method has a constant time complexity, as it directly returns the
+	 * precomputed number of qubits stored in the circuit without iterating or
+	 * performing any additional calculations.
+	 *
 	 * @return The integer representing the total number of qubits in the quantum
 	 *         circuit.
 	 *
-	 * @implNote The method retrieves the number of qubits stored in the circuit.
-	 *           Qubits are fundamental units of quantum information, and their
-	 *           count indicates the size or capacity of the quantum circuit.
-	 *
-	 * @implNote This function does not modify the circuit in any way.
-	 *
-	 * @implNote The method has a constant time complexity, as it directly returns
-	 *           the precomputed number of qubits stored in the circuit without
-	 *           iterating or performing any additional calculations.
-	 *
-	 * @see QuantumCircuit
+	 * @see QuantumCircuitSimulator
 	 */
 	public int countQubits() {
 		return this.numQubits;

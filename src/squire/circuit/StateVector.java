@@ -50,8 +50,8 @@ public class StateVector {
 	 * @return A new instance of StateVector initialized with the specified
 	 *         amplitudes.
 	 */
-	public static StateVector initialize(int size, ComplexNumber[] amps) {
-		return new StateVector(size, amps);
+	public static StateVector initialize(int numBits, ComplexNumber[] amps) {
+		return new StateVector(numBits, amps);
 	}
 
 	/**
@@ -61,10 +61,10 @@ public class StateVector {
 	 * @param numBits The number of qubits in the system.
 	 * @return A new instance of StateVector representing the state |0⟩.
 	 */
-	public static StateVector createZeroState(int size) {
-		ComplexNumber[] zeroAmplitudes = new ComplexNumber[1 << size];
+	public static StateVector createZeroState(int numBits) {
+		ComplexNumber[] zeroAmplitudes = new ComplexNumber[1 << numBits];
 		zeroAmplitudes[0] = new ComplexNumber(1, 0); // Probability amplitude of |0⟩ is 1, others are 0
-		return new StateVector(size, zeroAmplitudes);
+		return new StateVector(numBits, zeroAmplitudes);
 	}
 
 	/**
@@ -74,9 +74,9 @@ public class StateVector {
 	 * @param numBits The number of qubits in the system.
 	 * @return A new instance of StateVector with amplitudes of zero.
 	 */
-	public static StateVector empty(int size) {
-		ComplexNumber[] zeroAmplitudes = new ComplexNumber[1 << size];
-		return new StateVector(size, zeroAmplitudes);
+	public static StateVector empty(int numBits) {
+		ComplexNumber[] zeroAmplitudes = new ComplexNumber[1 << numBits];
+		return new StateVector(numBits, zeroAmplitudes);
 	}
 
 	/**
@@ -199,7 +199,6 @@ public class StateVector {
 	 * qubit state. Returns null if the state vector is orthogonal to the specified
 	 * state.
 	 * 
-	 * @param n The number of qubits in the system.
 	 * @param q The qubit to project onto.
 	 * @param s The qubit state to project onto.
 	 * @return The result of the projection.
@@ -231,6 +230,11 @@ public class StateVector {
 	 * Measures the specified qubit q with the number x as the random value,
 	 * returning the resulting state. This collapses the state.
 	 * 
+	 * @param q The qubit to measure
+	 * 
+	 * @param x The random number that was generated to determine whether the state
+	 *          collapses to true or false.
+	 * 
 	 * @return The collapsed state.
 	 */
 	public StateVector measure(int q, double x) {
@@ -252,6 +256,8 @@ public class StateVector {
 
 	/**
 	 * Checks whether the specified qubit is true, false, or not yet measured.
+	 * 
+	 * @param q The qubit to get the measurement for.
 	 * 
 	 * @return true if the specified qubit is true, false if it is false, or null if
 	 *         it is unmeasured.

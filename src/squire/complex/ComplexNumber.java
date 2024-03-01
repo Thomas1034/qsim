@@ -203,12 +203,12 @@ public class ComplexNumber {
 	/**
 	 * Checks if two complex numbers are approximately equal.
 	 *
-	 * @param that The complex number to compare with.
+	 * @param obj The complex number to compare with.
 	 * @return True if approximately equal, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == this) {
+		if (super.equals(obj)) {
 			return true;
 		}
 		if (obj instanceof ComplexNumber that) {
