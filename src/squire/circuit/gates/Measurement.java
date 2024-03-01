@@ -9,7 +9,7 @@ public class Measurement implements UncombinableCircuitModifier {
 
 	private int target;
 	private Random random;
-	
+
 	public Measurement(int numQubits, int target, Random rand) {
 		this.target = target;
 		this.random = rand;
