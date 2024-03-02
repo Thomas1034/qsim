@@ -2,4 +2,3 @@ module:squire
 squire.circuit
 squire.circuit.gates
 squire.complex
-squire.test

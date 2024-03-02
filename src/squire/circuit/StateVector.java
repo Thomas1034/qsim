@@ -6,6 +6,13 @@ import java.util.Arrays;
 import squire.complex.ComplexMatrix;
 import squire.complex.ComplexNumber;
 
+/**
+ * Represents a quantum state vector, which is a mathematical entity used to
+ * describe the state of a quantum system. The state vector contains probability
+ * amplitudes for each possible basis state of the quantum system. This class
+ * provides methods for initializing, manipulating, and measuring quantum
+ * states.
+ */
 public class StateVector {
 
 	private int numBits;
