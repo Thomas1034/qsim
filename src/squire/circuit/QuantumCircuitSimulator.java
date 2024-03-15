@@ -38,7 +38,7 @@ import squire.circuit.gates.ZGate;
  * @see CombinableCircuitModifier
  * @see UncombinableCircuitModifier
  */
-public class QuantumCircuitSimulator {
+public class QuantumCircuitSimulator implements UncombinableCircuitModifier {
 
 	/**
 	 * List of quantum gates representing the sequence of operations in the quantum
@@ -644,6 +644,16 @@ public class QuantumCircuitSimulator {
 		this.addGateFast(g);
 	}
 
+	@Override
+	public StateVector apply(StateVector state) {
+		// Run the circuit.
+		for (CircuitModifier cm : this.gates) {
+			state = cm.apply(state);
+		}
+
+		return state;
+	}
+
 	/**
 	 * Returns the number of qubits in the quantum circuit.
 	 *
@@ -662,7 +672,8 @@ public class QuantumCircuitSimulator {
 	 *
 	 * @see QuantumCircuitSimulator
 	 */
-	public int countQubits() {
+	@Override
+	public int numQubits() {
 		return this.numQubits;
 	}
 }
