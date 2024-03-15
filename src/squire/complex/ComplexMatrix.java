@@ -454,4 +454,9 @@ public class ComplexMatrix implements CombinableCircuitModifier {
 		return this;
 	}
 
+	@Override
+	public int numQubits() {
+		return this.getRows().bitLength();
+	}
+
 }

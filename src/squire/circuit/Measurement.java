@@ -1,9 +1,6 @@
-package squire.circuit.gates;
+package squire.circuit;
 
 import java.util.Random;
-
-import squire.circuit.StateVector;
-import squire.circuit.UncombinableCircuitModifier;
 
 /**
  * The Measurement class represents a quantum measurement operation on a single
@@ -15,6 +12,7 @@ public class Measurement implements UncombinableCircuitModifier {
 
 	private int target;
 	private Random random;
+	private int size;
 
 	/**
 	 * Constructs a Measurement object with the specified number of qubits, target
@@ -28,11 +26,17 @@ public class Measurement implements UncombinableCircuitModifier {
 	public Measurement(int numQubits, int target, Random rand) {
 		this.target = target;
 		this.random = rand;
+		this.size = numQubits;
 	}
 
 	@Override
 	public StateVector apply(StateVector state) {
-		return state.measure(target, random.nextDouble());
+		return state.measure(this.target, this.random.nextDouble());
+	}
+	
+	@Override
+	public int numQubits() {
+		return this.size;
 	}
 
 }

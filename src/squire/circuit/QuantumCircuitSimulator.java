@@ -7,7 +7,6 @@ import squire.circuit.gates.CNOTGate;
 import squire.circuit.gates.CZGate;
 import squire.circuit.gates.HGate;
 import squire.circuit.gates.IGate;
-import squire.circuit.gates.Measurement;
 import squire.circuit.gates.RXGate;
 import squire.circuit.gates.RYGate;
 import squire.circuit.gates.RZGate;
@@ -578,7 +577,7 @@ public class QuantumCircuitSimulator {
 	 * @see QuantumGate#combine(QuantumGate)
 	 */
 	private void addGateFast(CircuitModifier g) {
-
+		
 		// Check if you're adding an uncombinable gate.
 		if (g instanceof UncombinableCircuitModifier) {
 			// If it is uncombinable, simplify the circuit.

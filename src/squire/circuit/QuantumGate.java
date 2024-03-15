@@ -22,6 +22,7 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 
 	private ComplexMatrix matrix;
 	private ComplexMatrix originalMatrix;
+	private int size;
 
 	/**
 	 * Constructs a quantum gate with the specified complex matrix, number of
@@ -46,6 +47,9 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 		if (matrix.getRows().compareTo(BigInteger.valueOf(1 << targetBits.length)) != 0) {
 			throw new IllegalArgumentException("The matrix cannot be applied to that number of bits.");
 		}
+		// Save the number of qubits.
+		this.size = numQubits;
+		
 		// Copy over the data.
 		this.originalMatrix = matrix;
 
@@ -194,8 +198,14 @@ public abstract class QuantumGate implements CombinableCircuitModifier {
 	 * @return A new circuit modifier representing the combination of the two
 	 *         modifiers.
 	 */
+	@Override
 	public CircuitModifier combine(CombinableCircuitModifier c) {
 		return this.asMatrix().mult(c.asMatrix());
+	}
+	
+	@Override
+	public int numQubits() {
+		return this.size;
 	}
 
 }

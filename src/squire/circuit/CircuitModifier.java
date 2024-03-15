@@ -27,4 +27,10 @@ public sealed interface CircuitModifier permits CombinableCircuitModifier, Uncom
 	 *         modification.
 	 */
 	public StateVector apply(StateVector state);
+	
+	/**
+	 * Returns the number of qubits this gate applies to.
+	 * @return The number of qubits this gate applies to.
+	 */
+	public int numQubits();
 }
