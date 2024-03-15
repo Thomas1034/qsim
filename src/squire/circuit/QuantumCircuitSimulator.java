@@ -26,10 +26,10 @@ import squire.circuit.gates.ZGate;
  * quantum gates and perform simulations to obtain measurement outcomes.
  *
  * {@code QuantumCircuitSimulator} utilizes a {@link StateVector} to represent
- * the quantum state of the system and applies {@link QuantumGate} and {@link Measurement}
- * operations to simulate the evolution of the quantum circuit. The class
- * supports optimization techniques to improve simulation efficiency by
- * combining adjacent gates when possible.
+ * the quantum state of the system and applies {@link QuantumGate} and
+ * {@link Measurement} operations to simulate the evolution of the quantum
+ * circuit. The class supports optimization techniques to improve simulation
+ * efficiency by combining adjacent gates when possible.
  *
  * @see CircuitModifier
  * @see QuantumGate
@@ -42,8 +42,8 @@ public class QuantumCircuitSimulator {
 
 	/**
 	 * List of quantum gates representing the sequence of operations in the quantum
-	 * circuit. Each element is a {@link CircuitModifier}, which can be a quantum gate or
-	 * measurement operation.
+	 * circuit. Each element is a {@link CircuitModifier}, which can be a quantum
+	 * gate or measurement operation.
 	 *
 	 * @see CircuitModifier
 	 * @see CombinableCircuitModifier
@@ -577,7 +577,12 @@ public class QuantumCircuitSimulator {
 	 * @see QuantumGate#combine(QuantumGate)
 	 */
 	private void addGateFast(CircuitModifier g) {
-		
+
+		if (g.numQubits() > this.numQubits) {
+			throw new IllegalArgumentException("Cannot apply an operator that takes " + g.numQubits()
+					+ "qubits to a circuit with " + this.numQubits + " qubits");
+		}
+
 		// Check if you're adding an uncombinable gate.
 		if (g instanceof UncombinableCircuitModifier) {
 			// If it is uncombinable, simplify the circuit.
