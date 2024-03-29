@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import squire.circuit.gates.CNOTGate;
+import squire.circuit.gates.CPGate;
 import squire.circuit.gates.CZGate;
 import squire.circuit.gates.HGate;
 import squire.circuit.gates.IGate;
+import squire.circuit.gates.PGate;
 import squire.circuit.gates.RXGate;
 import squire.circuit.gates.RYGate;
 import squire.circuit.gates.RZGate;
@@ -222,6 +224,31 @@ public class QuantumCircuitSimulator implements UncombinableCircuitModifier {
 	}
 
 	/**
+	 * Adds a phase (P) gate operation to the quantum circuit, performing a phase
+	 * angle of theta on the specified qubit.
+	 *
+	 * The method creates a phase (P) gate operation with the given qubit index and
+	 * phase angle and adds it to the quantum circuit. The phase gate is a
+	 * single-qubit gate that performs a phase shift on the state of the targeted
+	 * qubit.
+	 *
+	 * The phase gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing a phase shift
+	 * of theta to the targeted qubit.
+	 *
+	 * @param theta The phase shift to apply to the qubit
+	 * @param q     The index of the qubit to which the phase gate is applied.
+	 *
+	 * @see PGate
+	 * @see QuantumCircuitSimulator
+	 * @see StateVector
+	 */
+	public void p(double theta, int q) {
+		QuantumGate g = (new PGate(this.numQubits, q, theta));
+		this.addGate(g);
+	}
+
+	/**
 	 * Adds an Identity (I) gate operation to the quantum circuit, performing no
 	 * operation on the specified qubit.
 	 *
@@ -390,6 +417,32 @@ public class QuantumCircuitSimulator implements UncombinableCircuitModifier {
 	 */
 	public void cz(int q, int c) {
 		QuantumGate g = (new CZGate(this.numQubits, q, c));
+		this.addGate(g);
+	}
+
+	/**
+	 * Adds a Controlled-Phase (CP) gate operation to the quantum circuit.
+	 * 
+	 * The method creates a Controlled-Phase (CP) gate operation with the given
+	 * qubit indices and phase shift and adds it to the quantum circuit. The CP gate
+	 * introduces a phase shift in the target qubit based on the state of the
+	 * control qubit.
+	 *
+	 * The CP gate is added to the circuit, and its application will modify the
+	 * state vector during the quantum circuit execution, introducing conditional
+	 * phase shifts based on the control qubit state.
+	 *
+	 * @param theta The number of radians to shift the relative phase.
+	 * @param q     The index of the target qubit on which the CZ gate is applied.
+	 * @param c     The index of the control qubit that influences the CZ gate
+	 *              operation.
+	 *
+	 * @see CPGate
+	 * @see QuantumCircuitSimulator
+	 * @see StateVector
+	 */
+	public void cp(double theta, int q, int c) {
+		QuantumGate g = (new CPGate(this.numQubits, q, c, theta));
 		this.addGate(g);
 	}
 
@@ -640,8 +693,9 @@ public class QuantumCircuitSimulator implements UncombinableCircuitModifier {
 	 * @see CombinableCircuitModifier
 	 * @see QuantumGate#combine(QuantumGate)
 	 */
-	private void addGate(CircuitModifier g) {
+	public QuantumCircuitSimulator addGate(CircuitModifier g) {
 		this.addGateFast(g);
+		return this;
 	}
 
 	@Override
